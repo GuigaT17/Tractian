@@ -1,6 +1,7 @@
 import express from "express";
 import Asset from "src/modules/asset/entity/Asset";
 import Unity from "src/modules/unit/entity/Unit";
+import User from "src/modules/users/entity/User";
 import Company from "../entity/Company";
 
 const companyRouter = express.Router();
@@ -48,5 +49,37 @@ companyRouter.get('/', async (req, res) => {
         res.status(500).send(error)
     }
 })
+
+companyRouter.put('/:id', async (req, res) => {
+    try {
+        const company = await Company.findById(req.params.id);
+        if(company){
+            company.name = req.body.name;
+            await company.save();
+            res.send(company);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+companyRouter.delete('/:id', async (req, res) => {
+    try {
+        const company = await Company.findById(req.params.id);
+        if(company){
+            await Asset.deleteMany({"idCompany": company.id})
+            await User.deleteMany({"idCompany": company.id})
+            await Unity.deleteMany({"idCompany": company.id})
+            await company.delete();
+            res.status(204).send();
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 export default companyRouter;

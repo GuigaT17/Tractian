@@ -67,4 +67,56 @@ assetRouter.get('/', async (req, res) => {
     }
 });
 
+assetRouter.put('/:id', async (req, res) => {
+
+    if(req.body.healthLevel < 0 || req.body.healthLevel > 100){
+        throw new Error("Health level must be between 0 and 100");
+    }
+
+    if(!(req.body.status == "Running" || req.body.status == "Alerting" || req.body.status == "Stopped")){
+        throw new Error("Status has to be Running, Alerting or Stopped");
+    }
+    
+    try {
+        const asset = await Asset.findById(req.params.id);
+        if(asset){
+            if(req.body.name){
+                asset.name = req.body.name;
+            }
+            if(req.body.healthLevel){
+                asset.healthLevel = req.body.healthLevel;
+            }
+            if(req.body.status){
+                asset.status = req.body.status;
+            }
+            if(req.body.model){
+                asset.model = req.body.model;
+            }
+            if(req.body.owner){
+                asset.owner = req.body.owner;
+            }
+            await asset.save();
+            res.send(asset);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+assetRouter.delete('/:id', async (req, res) => {
+    try {
+        const asset = await Asset.findById(req.params.id);
+        if(asset){
+            await asset.delete();
+            res.status(204).send();
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
 export default assetRouter;

@@ -14,7 +14,7 @@ userRouter.post('/', async (request, response) => {
 
     const user = new User({...request.body});
     try {
-        user.save();
+        await user.save();
         response.status(201).json(user);
     } catch (error) {
         response.status(400).json(error);
@@ -46,5 +46,34 @@ userRouter.get('/', async (req, res) => {
         res.status(500).send(error);
     }
 })
+
+userRouter.put('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if(user){
+            user.name = req.body.name;
+            await user.save();
+            res.send(user);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
+
+userRouter.delete('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if(user){
+            await user.delete();
+            res.status(204).send();
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
+});
 
 export default userRouter;

@@ -1,6 +1,6 @@
 import express from "express";
-import Asset from "src/modules/asset/entity/Asset";
-import Company from "src/modules/company/entity/Company";
+import Asset from "../../../modules/asset/entity/Asset";
+import Company from "../../../modules/company/entity/Company";
 import Unit from "../entity/Unit";
 
 const unitRouter = express.Router();

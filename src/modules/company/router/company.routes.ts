@@ -1,7 +1,7 @@
 import express from "express";
-import Asset from "src/modules/asset/entity/Asset";
-import Unity from "src/modules/unit/entity/Unit";
-import User from "src/modules/users/entity/User";
+import Asset from "../../../modules/asset/entity/Asset";
+import Unity from "../../../modules/unit/entity/Unit";
+import User from "../../../modules/users/entity/User";
 import Company from "../entity/Company";
 
 const companyRouter = express.Router();

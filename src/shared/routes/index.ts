@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import assetRouter from 'src/modules/asset/routes/asset.routes';
-import companyRouter from 'src/modules/company/router/company.routes';
-import unitRouter from 'src/modules/unit/routes/unit.routes';
-import userRouter from 'src/modules/users/routes/user.routes';
+import assetRouter from '../../modules/asset/routes/asset.routes';
+import companyRouter from '../../modules/company/router/company.routes';
+import unitRouter from '../../modules/unit/routes/unit.routes';
+import userRouter from '../../modules/users/routes/user.routes';
 
 const routes = Router();
 

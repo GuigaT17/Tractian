@@ -1,5 +1,5 @@
 import express from "express";
-import Company from "src/modules/company/entity/Company";
+import Company from "../../../modules/company/entity/Company";
 import User from "../entity/User";
 
 const userRouter = express.Router();

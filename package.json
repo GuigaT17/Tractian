@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch mode_modules src/shared/server.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch mode_modules src/shared/server.ts"
   },
   "author": "",

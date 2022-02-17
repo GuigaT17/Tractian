@@ -5,6 +5,7 @@ import MONGO from '../config/mongoose';
 import routes from './routes'
 import mongoose from 'mongoose';
 import AppError from './errors/AppError';
+const PORT : string|number = process.env.PORT || 3333;
 
 const app = express();
 
@@ -38,6 +39,6 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.listen(3333, () => {
-  console.log('Server started on port 3333');
+app.listen(PORT, () => {
+  console.log('Server started on port '+ PORT);
 });
